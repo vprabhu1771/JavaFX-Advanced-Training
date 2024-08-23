@@ -1,0 +1,64 @@
+package com.example.helloworld;
+
+import javafx.application.Application;
+import javafx.geometry.Insets;
+import javafx.geometry.Rectangle2D;
+import javafx.scene.Scene;
+import javafx.scene.control.Label;
+import javafx.scene.layout.VBox;
+import javafx.stage.Screen;
+import javafx.stage.Stage;
+
+public class WindowWidthHeightExample extends Application {
+
+    @Override
+    public void start(Stage primaryStage) {
+        // Get the primary screen
+        Screen screen = Screen.getPrimary();
+
+        // Get the bounds of the screen
+        Rectangle2D bounds = screen.getBounds();
+
+        // Retrieve the width and height of the screen
+        double screenWidth = bounds.getWidth();
+        double screenHeight = bounds.getHeight();
+
+        // Set the initial width and height of the window
+        double windowWidth = 400;  // set your desired width
+        double windowHeight = 300; // set your desired height
+
+        // Create labels to display width and height
+        Label widthLabel = new Label("Window Width: " + windowWidth);
+        Label heightLabel = new Label("Window Height: " + windowHeight);
+
+        // Set the width and height of the primary stage
+        primaryStage.setWidth(windowWidth);
+        primaryStage.setHeight(windowHeight);
+
+        // Add labels to a VBox
+        VBox vbox = new VBox(10); // 10 is the spacing between elements
+        vbox.setPadding(new Insets(10));
+        vbox.getChildren().addAll(widthLabel, heightLabel);
+
+        // Create a scene with the VBox
+        Scene scene = new Scene(vbox);
+
+        // Set the scene to the primary stage
+        primaryStage.setScene(scene);
+
+        // Rest of your JavaFX application code...
+        primaryStage.setTitle("Window Width Example");
+
+        // Update labels with the actual width and height when the stage is shown
+        primaryStage.setOnShown(event -> {
+            widthLabel.setText("Window Width: " + primaryStage.getWidth());
+            heightLabel.setText("Window Height: " + primaryStage.getHeight());
+        });
+
+        primaryStage.show();
+    }
+
+    public static void main(String[] args) {
+        launch(args);
+    }
+}

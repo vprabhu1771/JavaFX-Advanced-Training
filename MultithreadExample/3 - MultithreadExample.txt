@@ -1,0 +1,52 @@
+package com.example.demo;
+
+import javafx.application.Application;
+import javafx.application.Platform;
+import javafx.concurrent.Task;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
+
+public class MultithreadExample extends Application {
+
+    @Override
+    public void start(Stage primaryStage) {
+        Label label = new Label("Press the button to start the task.");
+        Button button = new Button("Start Task");
+
+        button.setOnAction(event -> startBackgroundTask(label));
+
+        VBox root = new VBox(10, label, button);
+        Scene scene = new Scene(root, 300, 200);
+
+        primaryStage.setTitle("JavaFX Multithreading Example");
+        primaryStage.setScene(scene);
+        primaryStage.show();
+    }
+
+    private void startBackgroundTask(Label label) {
+        Task<Void> task = new Task<Void>() {
+            @Override
+            protected Void call() throws Exception {
+                // Simulate a long-running task
+                Thread.sleep(3000);
+
+                // Update the label on the JavaFX Application Thread
+                Platform.runLater(() -> label.setText("Task completed!"));
+
+                return null;
+            }
+        };
+
+        // Run the task on a separate thread
+        Thread thread = new Thread(task);
+        thread.setDaemon(true);
+        thread.start();
+    }
+
+    public static void main(String[] args) {
+        launch(args);
+    }
+}

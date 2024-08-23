@@ -1,0 +1,4 @@
+In JavaFX, you can obtain the width of the current display window by accessing the `Screen` class. Here's a simple example:
+
+
+This example retrieves the primary screen's width using `Screen.getPrimary()` and `bounds.getWidth()`. You can then use this value as needed in your JavaFX application.

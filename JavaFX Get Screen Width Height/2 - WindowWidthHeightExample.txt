@@ -1,0 +1,49 @@
+package com.example.helloworld;
+
+import javafx.application.Application;
+import javafx.geometry.Rectangle2D;
+import javafx.stage.Screen;
+import javafx.stage.Stage;
+
+public class WindowWidthHeightExample extends Application {
+
+    @Override
+    public void start(Stage primaryStage) {
+        // Get the primary screen
+        Screen screen = Screen.getPrimary();
+
+        // Get the bounds of the screen
+        Rectangle2D bounds = screen.getBounds();
+
+        // Retrieve the width of the screen
+        double screenWidth = bounds.getWidth();
+
+        // Retrieve the height of the screen
+        double screenHeight = bounds.getHeight();
+
+        System.out.println("Screen Width: " + screenWidth);
+
+        System.out.println("Screen Height: " + screenHeight);
+
+        // Set the width and height of the primary stage
+
+        // set your desired width
+        double windowWidth = 400;
+
+        // set your desired height
+        double windowHeight = 300;
+
+        primaryStage.setWidth(windowWidth);
+        primaryStage.setHeight(windowHeight);
+
+        // Rest of your JavaFX application code...
+        primaryStage.setTitle("Window Width Height Example");
+
+
+        primaryStage.show();
+    }
+
+    public static void main(String[] args) {
+        launch(args);
+    }
+}
